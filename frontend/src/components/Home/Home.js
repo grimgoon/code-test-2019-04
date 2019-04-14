@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-
 import * as actionCreator from '../../store/actions/actions'
-import Card from '../../utils/UI/Card/Card';
 import style from './Home.module.css';
+
+import Card from '../../utils/UI/Card/Card';
+import SearchBar from '../../utils/UI/SearchBar/SearchBar';
 
 class Home extends Component {
 
@@ -20,11 +21,12 @@ class Home extends Component {
 
     render() {
         return (
-            <>
-            <h3>Trending games right now</h3> 
-            <div className={style.cards}>
-                {this.twitchTopCards()}
-            </div>
+            <>  
+                <SearchBar/>
+                <h2>Trending games right now!</h2> 
+                <div className={style.cards}>
+                    {this.twitchTopCards()}
+                </div>
             </>
         );
     }

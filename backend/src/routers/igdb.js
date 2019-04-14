@@ -17,7 +17,7 @@ const requestOptions = {
     timeout: 1000,
 };
 
-router.get('/igdb/search/:name',cache(86400), async (req,res) => {
+router.get('/igdb/search/:name', cache(86400), async (req,res) => {
     try {
         const response = await apicalypse(requestOptions)
             .fields('name')
@@ -35,7 +35,7 @@ router.get('/igdb/search/:name',cache(86400), async (req,res) => {
     }
 });
 
-router.get('/igdb/game/:id',cache(604800), async (req,res) => {
+router.get('/igdb/game/:id', cache(604800), async (req,res) => {
     try {
         const response = await apicalypse(requestOptions)
             .fields('*,cover.*')

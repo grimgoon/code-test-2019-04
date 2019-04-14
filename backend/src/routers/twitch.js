@@ -9,16 +9,16 @@ const config = {
     headers : {"Client-ID" : process.env.TWITCH_CLIENT_ID}
 };
 
-router.get('/twitch/:name',cache(1800), async (req,res) => {
+router.get('/twitch/game/:name', cache(1800), async (req,res) => {
     try {
-        const gameURL = url + '/games?name=' + req.params.name;
-        const gameResponse = await axios.get(gameURL, config);
+        const gameUrl = url + '/games?name=' + req.params.name;
+        const gameResponse = await axios.get(gameUrl, config);
         if(gameResponse.data.data.length === 0 ) {
             return res.status(404).send({"error" : "Game not found with that name"})
         }
 
-        const streamsURL = url + '/streams?game_id=' + gameResponse.data.data[0].id;
-        const streamsResponse = await axios.get(streamsURL, config);
+        const streamsUrl = url + '/streams?game_id=' + gameResponse.data.data[0].id;
+        const streamsResponse = await axios.get(streamsUrl, config);
         if(streamsResponse.data.data.length === 0 ) {
             return res.status(404).send({"error" : "Streams not found with that game name"})
         }
@@ -28,5 +28,19 @@ router.get('/twitch/:name',cache(1800), async (req,res) => {
         res.status(400).send(e.error);
     }
 });
+
+router.get('/twitch/top', cache(1800), async (req,res) => {
+    try {
+        const gameUrl = url + '/games/top';
+        const response = await axios.get(gameUrl, config);
+
+        res.send(response.data); 
+    } catch(e) {
+        res.status(400).send(e.error);
+    }
+});
+
+
+
 
 module.exports = router;

@@ -10,14 +10,13 @@ class Home extends Component {
 
     componentDidMount() {
         this.props.fetchTwitchTop();
-    }
+    };
 
     twitchTopCards = () => {
         return this.props.twitchTop.map(data => {
-            const imageUrl = data.box_art_url.replace('{width}','').replace('{height}', '');
-            return <Card key={data.name} name={data.name} imageUrl={imageUrl} />
+            return <Card key={data.name} name={data.name} />
         });
-    }
+    };
 
     render() {
         return (
@@ -29,7 +28,7 @@ class Home extends Component {
                 </div>
             </>
         );
-    }
+    };
 };
 
 const mapStateToProps = state => ({

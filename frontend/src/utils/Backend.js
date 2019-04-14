@@ -1,8 +1,8 @@
 import Axios from 'axios';
 
-export const getTwitchTop = () => {
+export const getTwitchTop = (amount) => {
     return new Promise (async (resolve,reject) => {
-        Axios.get('/twitch/top')
+        Axios.get('/twitch/top/' + amount)
             .then(resolve)
             .catch(reject);
     });

@@ -2,5 +2,11 @@
     width: 86%;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-columns: 22% 22% 22% 22%;
+    grid-column-gap: 4%;
+    grid-row-gap: 2%;
+}
+
+h2 {
+    text-align: center;
 }

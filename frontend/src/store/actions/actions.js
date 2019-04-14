@@ -2,9 +2,9 @@ import * as request from '../../utils/backend';
 import * as actionTypes from './actionTypes';
 
 
-export const fetchTwitchTop = () => (dispatch,getState) => {
+export const fetchTwitchTop = (amount) => (dispatch,getState) => {
     if(getState().twitchTop.length === 0) {
-        request.getTwitchTop()
+        request.getTwitchTop(amount)
             .then(res => dispatch(updateTwitchTop(res.data.data)))
             .catch();
     }

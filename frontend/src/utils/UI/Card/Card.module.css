@@ -1,7 +1,8 @@
 .card {
-    max-width: 320px;
     background-color: #ffffff;
-    text-align: center
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 8px 15px 0 rgba(40,40,40,.18)
 }
 
 .card > img {

@@ -19,11 +19,13 @@ class Home extends Component {
     }
 
     render() {
-        console.log(this.props.twitchTop);
-        return ( 
+        return (
+            <>
+            <h3>Trending games right now</h3> 
             <div className={style.cards}>
                 {this.twitchTopCards()}
             </div>
+            </>
         );
     }
 };
@@ -33,7 +35,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-        fetchTwitchTop: () => dispatch(actionCreator.fetchTwitchTop()),
+        fetchTwitchTop: () => dispatch(actionCreator.fetchTwitchTop(17)),
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(Home);

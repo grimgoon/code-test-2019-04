@@ -29,9 +29,9 @@ router.get('/twitch/game/:name', cache(1800), async (req,res) => {
     }
 });
 
-router.get('/twitch/top', cache(1800), async (req,res) => {
+router.get('/twitch/top/:amount', cache(1800), async (req,res) => {
     try {
-        const gameUrl = url + '/games/top';
+        const gameUrl = url + '/games/top?first=' + req.params.amount;
         const response = await axios.get(gameUrl, config);
 
         res.send(response.data); 

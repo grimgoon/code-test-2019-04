@@ -2,6 +2,8 @@ const express = require('express');
 const router = new express.Router();
 const apicalypse = require('apicalypse').default;
 
+const cache = require('../utils/mcache');
+
 const url = 'https://api-v3.igdb.com';
 const requestOptions = {
     queryMethod: 'body',
@@ -15,7 +17,7 @@ const requestOptions = {
     timeout: 1000,
 };
 
-router.get('/igdb/search/:name', async (req,res) => {
+router.get('/igdb/search/:name',cache(86400), async (req,res) => {
     try {
         const response = await apicalypse(requestOptions)
             .fields('name')
@@ -33,10 +35,10 @@ router.get('/igdb/search/:name', async (req,res) => {
     }
 });
 
-router.get('/igdb/game/:id', async (req,res) => {
+router.get('/igdb/game/:id',cache(604800), async (req,res) => {
     try {
         const response = await apicalypse(requestOptions)
-            .fields('*')
+            .fields('*,cover.*')
             .where("id=" + req.params.id)
             .request('/games');
 

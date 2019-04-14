@@ -2,12 +2,14 @@ const express = require('express');
 const router = new express.Router();
 const axios = require('axios');
 
+const cache = require('../utils/mcache');
+
 const url = 'https://api.twitch.tv/helix';
 const config = {
     headers : {"Client-ID" : process.env.TWITCH_CLIENT_ID}
 };
 
-router.get('/twitch/:name', async (req,res) => {
+router.get('/twitch/:name',cache(1800), async (req,res) => {
     try {
         const gameURL = url + '/games?name=' + req.params.name;
         const gameResponse = await axios.get(gameURL, config);

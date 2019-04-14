@@ -1,0 +1,10 @@
+.card {
+    max-width: 320px;
+    background-color: #ffffff;
+    text-align: center
+}
+
+.card > img {
+    width: 100%;
+    height: auto;
+}

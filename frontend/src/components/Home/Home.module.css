@@ -1,0 +1,6 @@
+.cards {
+    width: 86%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+}

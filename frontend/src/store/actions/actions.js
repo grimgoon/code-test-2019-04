@@ -3,9 +3,9 @@ import * as actionTypes from './actionTypes';
 
 
 export const fetchTwitchTop = () => (dispatch,getState) => {
-    if(!getState().twitchTop) {
+    if(getState().twitchTop.length === 0) {
         request.getTwitchTop()
-            .then(res => dispatch(updateTwitchTop(res)))
+            .then(res => dispatch(updateTwitchTop(res.data.data)))
             .catch();
     }
 };

@@ -12,8 +12,6 @@ app.use(express.json());
 app.use(twitchRouter);
 app.use(igdbRouter);
 
-
-
 app.listen(port, () => {
     console.log('Server is up on port: ' + port);
 });

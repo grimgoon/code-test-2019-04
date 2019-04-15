@@ -40,7 +40,4 @@ router.get('/twitch/top/:amount', cache(1800), async (req,res) => {
     }
 });
 
-
-
-
 module.exports = router;

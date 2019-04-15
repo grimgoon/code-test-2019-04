@@ -35,7 +35,7 @@ router.get('/igdb/search/:name', cache(86400), async (req,res) => {
                 return res.status(404).send({'error' : 'Game not found with that name'});
             }
             
-        res.send(getCache_Games());
+        res.send(response.data);
     } catch(e) {
         res.status(400).send(e.error);
     }
@@ -51,7 +51,7 @@ router.get('/igdb/game/id/:id', cache(604800), async (req,res) => {
             if(response.data.length === 0) {
                 return res.status(404).send({'error' : 'Game not found with that id'});
             }
-        updateCache_Games(req.params.name,response.data)
+        updateCache_Games(response.data[0].name,response.data[0]);
         res.send(getCache_Games());
     } catch (e) {
         res.status(400).send(e.error);
@@ -68,8 +68,9 @@ router.get('/igdb/game/name/:name', cache(604800), async (req,res) => {
         if(response.data.length === 0) {
             return res.status(404).send({'error' : 'Game not found with that name'})
         }
-        updateCache_Games(req.params.name,response.data)
-        res.send(getCache_Games());
+        console.log(response.data.name);
+        updateCache_Games(response.data[0].name,response.data[0]);
+        res.send(response.data);
     } catch (e) {
         console.log(e);
         res.status(400).send(e.error);
@@ -77,7 +78,6 @@ router.get('/igdb/game/name/:name', cache(604800), async (req,res) => {
 });
 
 const getCache_Games = () => {
-    console.log(mcache.keys());
     return mcache.get(gameCacheName);
 };
 

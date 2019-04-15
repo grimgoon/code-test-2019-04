@@ -48,11 +48,12 @@ router.get('/igdb/game/id/:id', cache(604800), async (req,res) => {
             .where('id=' + req.params.id)
             .request('/games');
 
-            if(response.data.length === 0) {
-                return res.status(404).send({'error' : 'Game not found with that id'});
-            }
+        if(response.data.length === 0) {
+            return res.status(404).send({'error' : 'Game not found with that id'});
+        }
+        
         updateCache_Games(response.data[0].name,response.data[0]);
-        res.send(getCache_Games());
+        res.send({[response.data[0].name] : response.data[0]});
     } catch (e) {
         res.status(400).send(e.error);
     }
@@ -68,11 +69,11 @@ router.get('/igdb/game/name/:name', cache(604800), async (req,res) => {
         if(response.data.length === 0) {
             return res.status(404).send({'error' : 'Game not found with that name'})
         }
-        console.log(response.data.name);
+
         updateCache_Games(response.data[0].name,response.data[0]);
-        res.send(response.data);
+        res.send({[response.data[0].name] : response.data[0]});
     } catch (e) {
-        console.log(e);
+        //Todo: fix error handling
         res.status(400).send(e.error);
     }
 });
@@ -89,10 +90,3 @@ const updateCache_Games = (name, data) => {
 };
 
 module.exports = router;
-
-
-
-
-
-
-

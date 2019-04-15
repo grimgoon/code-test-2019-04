@@ -15,3 +15,11 @@ export const getIgdbGameByName = (name) => {
             .catch(reject);
     });
 };
+
+export const getIgdbGames = () => {
+    return new Promise (async (resolve,reject) => {
+        Axios.get('/igdb/games')
+            .then(resolve)
+            .catch(reject);
+    });
+};

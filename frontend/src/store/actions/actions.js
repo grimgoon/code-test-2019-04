@@ -11,30 +11,36 @@ export const fetchTwitchTop = (amount) => (dispatch,getState) => {
     }
 };
 
-const updateTwitchTop = res => {
-    console.log(res);
-    return {
+const updateTwitchTop = res => ({
     type: actionTypes.FETCH_TWITCH_TOP,
     twitchTop: res
-}};
+});
 
 
 // IGDB
 
-export const fetchGameByName = (name) => (dispatch,getState) => {
-    if(!getState().gameData[name]) {
-        request.getIgdbGameByName(name)
-        .then(res => dispatch(updateGameData(res.data[0])))
+export const fetchGames = () => (dispatch,getState) => {
+    if(Object.entries(getState().gameData).length === 0 && getState().gameData.constructor === Object) {
+        request.getIgdbGames()
+        .then(res => dispatch(updateGameData(res.data, true)))
         .catch();
     }
 };
 
-const updateGameData = res => {
+export const fetchGameByName = (name) => (dispatch,getState) => {
+    if(!getState().gameData[name]) {
+        request.getIgdbGameByName(name)
+        .then(res => dispatch(updateGameData(res.data)))
+        .catch();
+    }
+};
+
+
+const updateGameData = (res, fetchedAllGames = false) => {
     return {
     type: actionTypes.UPDATE_GAME_DATA,
-    gameData : {
-        [res.name] : {
-            ...res
-        }
-    }
+    gameData : res,
+    fetchedAllGames 
 }};
+
+

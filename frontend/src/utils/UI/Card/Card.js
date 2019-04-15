@@ -3,21 +3,25 @@ import {connect} from 'react-redux';
 import * as actionCreator from '../../../store/actions/actions';
 import style from './Card.module.css';
 
-class Card extends Component {
 
+class Card extends Component {
     excludeTopGames = [
         "Just Chatting",
         "Twitch Presents",
         "Auto Chess",
-        "Music & Performing Arts"
-    ]
+        "Music & Performing Arts",
+        "Talk Shows & Podcasts",
+        "Poker",
+        "Chess",
+        "ASMR",
+        "Twitch Sings"
+    ];
 
     componentDidMount() {
-        console.log(this.props.name)
-        if(!this.excludeTopGames.some(game => this.props.name === game)) {
+        if(!this.excludeTopGames.some(game => this.props.name === game) && !this.props.game && this.props.fetchedAllGames) {
             this.props.fetchGame(this.props.name);
         }
-    }
+    };
 
     card = () => {
         const game = this.props.game;
@@ -29,17 +33,18 @@ class Card extends Component {
             </div> 
         }
         return null;
-    }
+    };
 
     render() {
-        return (this.card());
-    }
+        let card = this.card();
+        return (card);
+    };
 };
 
-const mapStateToProps = (state, ownProps) => {
-    return {
+const mapStateToProps = (state, ownProps) => ({
     game : state.gameData[ownProps.name],
-}};
+    fetchedAllGames : state.fetchedAllGames
+});
 
 const mapDispatchToProps = dispatch => ({
         fetchGame: (name) => dispatch(actionCreator.fetchGameByName(name)),

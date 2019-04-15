@@ -1,4 +1,4 @@
-import * as request from '../../utils/Backend';
+import * as request from '../../utils/backend';
 import * as actionTypes from './actionTypes';
 
 // TWITCH

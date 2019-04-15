@@ -10,7 +10,7 @@ export const getTwitchTop = (amount) => {
 
 export const getIgdbGameByName = (name) => {
     return new Promise (async (resolve,reject) => {
-        Axios.get('/igdb/games/name/' + name)
+        Axios.get('/igdb/game/name/' + name)
             .then(resolve)
             .catch(reject);
     });

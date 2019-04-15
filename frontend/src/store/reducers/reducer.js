@@ -17,6 +17,7 @@ const reducer = (state = initialState, action) => {
                 } 
             }
         case actionTypes.FETCH_TWITCH_TOP :
+        console.log(action);
         return {
             ...state,
             twitchTop : action.twitchTop

@@ -1,4 +1,4 @@
-import * as request from '../../utils/backend';
+import * as request from '../../utils/Backend';
 import * as actionTypes from './actionTypes';
 
 // TWITCH
@@ -11,10 +11,12 @@ export const fetchTwitchTop = (amount) => (dispatch,getState) => {
     }
 };
 
-const updateTwitchTop = res => ({
+const updateTwitchTop = res => {
+    console.log(res);
+    return {
     type: actionTypes.FETCH_TWITCH_TOP,
     twitchTop: res
-});
+}};
 
 
 // IGDB
@@ -28,7 +30,6 @@ export const fetchGameByName = (name) => (dispatch,getState) => {
 };
 
 const updateGameData = res => {
-    console.log(res);
     return {
     type: actionTypes.UPDATE_GAME_DATA,
     gameData : {

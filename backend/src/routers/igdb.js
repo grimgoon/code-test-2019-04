@@ -52,17 +52,17 @@ router.get('/igdb/game/id/:id', cache(86400), async (req,res) => {
     }
 });
 
-router.get('/igdb/games/name/:name', cache(10), async (req,res) => {
+router.get('/igdb/games/name/:name', cache(1800), async (req,res) => {
     try {
         const response = await apicalypse(requestOptions)
-            .fields('*,cover.*')
+            .fields('name,cover.*')
             .where('name="' + req.params.name + '"')
             .request('/games');
 
             console.log(response);
 
             if(response.data.length === 0) {
-                return res.status(404).send({'error' : 'Game not found with that name'})
+                return res.status(404).send()
             }
 
         res.send(response.data);

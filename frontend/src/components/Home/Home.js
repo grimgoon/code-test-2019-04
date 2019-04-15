@@ -19,10 +19,11 @@ class Home extends Component {
     };
 
     render() {
+        
         return (
             <>  
                 <SearchBar/>
-                <h2>Trending games right now!</h2> 
+                <h2>Trending games on Twitch right now!</h2> 
                 <div className={style.cards}>
                     {this.twitchTopCards()}
                 </div>

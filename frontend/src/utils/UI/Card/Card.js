@@ -5,33 +5,35 @@ import style from './Card.module.css';
 
 class Card extends Component {
 
+    excludeTopGames = [
+        "Just Chatting",
+        "Twitch Presents",
+        "Auto Chess",
+        "Music & Performing Arts"
+    ]
+
     componentDidMount() {
-        this.props.fetchGame(this.props.name);
+        console.log(this.props.name)
+        if(!this.excludeTopGames.some(game => this.props.name === game)) {
+            this.props.fetchGame(this.props.name);
+        }
     }
 
-    // shouldComponentUpdate(nextProps) {
-    //     console.log(this.props.game);
-    //     console.log(this.nextProps.game);
-    //     if(this.props.game !== nextProps.game) {
-    //         return true;
-    //     }
-    //     return false;
-    // }
+    card = () => {
+        const game = this.props.game;
+        if(game) {
+            const gameCover = game.cover ? '//images.igdb.com/igdb/image/upload/t_cover_big/' + game.cover.image_id + '.jpg' : 'https://static-cdn.jtvnw.net/ttv-static/404_boxart.jpg';
+            return <div className={style.card}>
+                <img src={gameCover} alt={game.name}/>
+                <h3>{this.props.name}</h3>
+            </div> 
+        }
+        return null;
+    }
 
     render() {
-        
-
-        return (
-            <div className={style.card}>
-                <img src={this.props.imageUrl} alt={this.props.name}/>
-                <h3>{this.props.name}</h3>
-            </div>
-        );
+        return (this.card());
     }
-
-    mapStateToProps = () => ({
-
-    });
 };
 
 const mapStateToProps = (state, ownProps) => {

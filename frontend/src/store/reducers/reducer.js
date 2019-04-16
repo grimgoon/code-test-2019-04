@@ -10,7 +10,6 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch(action.type) {
         case actionTypes.UPDATE_GAME_DATA :
-            console.log(action);
             return {
                 ...state,
                 gameData: {
@@ -20,7 +19,6 @@ const reducer = (state = initialState, action) => {
                 fetchedAllGames : action.fetchedAllGames
             }
         case actionTypes.FETCH_TWITCH_TOP :
-        console.log(action);
         return {
             ...state,
             twitchTop : action.twitchTop

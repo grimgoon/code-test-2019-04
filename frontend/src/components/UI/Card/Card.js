@@ -28,7 +28,9 @@ class Card extends Component {
         if(game) {
             const gameCover = game.cover ? '//images.igdb.com/igdb/image/upload/t_cover_big/' + game.cover.image_id + '.jpg' : 'https://static-cdn.jtvnw.net/ttv-static/404_boxart.jpg';
             return <div className={style.card}>
-                <img src={gameCover} alt={game.name}/>
+                <div className={style.gameCover}>
+                    <img src={gameCover} alt={game.name}/>
+                </div>
                 <h3>{this.props.name}</h3>
             </div> 
         }

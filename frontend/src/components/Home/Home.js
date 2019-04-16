@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import * as actionCreator from '../../store/actions/actions'
 import style from './Home.module.css';
 
-import Card from '../../utils/UI/Card/Card';
-import SearchBar from '../../utils/UI/SearchBar/SearchBar';
+import Card from '../UI/Card/Card';
+import SearchBar from '../UI/SearchBar/SearchBar';
 
 class Home extends Component {
 
@@ -19,7 +19,6 @@ class Home extends Component {
     };
 
     render() {
-        
         return (
             <>  
                 <SearchBar/>

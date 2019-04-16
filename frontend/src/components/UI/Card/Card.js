@@ -1,24 +1,27 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+
 import * as actionCreator from '../../../store/actions/actions';
 import style from './Card.module.css';
 
 
 class Card extends Component {
     excludeTopGames = [
-        "Just Chatting",
-        "Twitch Presents",
-        "Auto Chess",
-        "Music & Performing Arts",
-        "Talk Shows & Podcasts",
-        "Poker",
-        "Chess",
-        "ASMR",
-        "Twitch Sings"
+        "just-chatting",
+        "twitch-presents",
+        "auto-chess",
+        "music-and-performing-arts",
+        "talk-shows-and-podcasts",
+        "poker",
+        "chess",
+        "asmr",
+        "twitch-sings"
     ];
 
-    componentDidMount() {
-        if(!this.excludeTopGames.some(game => this.props.name === game) && !this.props.game && this.props.fetchedAllGames) {
+    componentDidUpdate() {
+        console.log(this.props.name);
+        if(!this.excludeTopGames.some(game => this.props.name === game) && !this.props.game && this.props.fetchedCachedGames) {
+            console.log("Blah!");
             this.props.fetchGame(this.props.name);
         }
     };
@@ -31,13 +34,14 @@ class Card extends Component {
                 <div className={style.gameCover}>
                     <img src={gameCover} alt={game.name}/>
                 </div>
-                <h3>{this.props.name}</h3>
+                <h3>{this.props.game.name}</h3>
             </div> 
         }
         return null;
     };
 
     render() {
+        console.log(this.props.fetchedCachedGames)
         let card = this.card();
         return (card);
     };
@@ -45,11 +49,11 @@ class Card extends Component {
 
 const mapStateToProps = (state, ownProps) => ({
     game : state.gameData[ownProps.name],
-    fetchedAllGames : state.fetchedAllGames
+    fetchedCachedGames : state.fetchedCachedGames
 });
 
 const mapDispatchToProps = dispatch => ({
-        fetchGame: (name) => dispatch(actionCreator.fetchGameByName(name)),
+        fetchGame: (slug) => dispatch(actionCreator.fetchGameBySlug(slug)),
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(Card);

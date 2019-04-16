@@ -27,20 +27,21 @@ export const fetchGames = () => (dispatch,getState) => {
     }
 };
 
-export const fetchGameByName = (name) => (dispatch,getState) => {
-    if(!getState().gameData[name]) {
-        request.getIgdbGameByName(name)
+export const fetchGameBySlug = (slug) => (dispatch,getState) => {
+    console.log(slug);
+    if(!getState().gameData[slug]) {
+        request.getIgdbGameBySlug(slug)
         .then(res => dispatch(updateGameData(res.data)))
         .catch();
     }
 };
 
 
-const updateGameData = (res, fetchedAllGames = false) => {
+const updateGameData = (res, fetchedCachedGames = false) => {
     return {
     type: actionTypes.UPDATE_GAME_DATA,
     gameData : res,
-    fetchedAllGames 
+    fetchedCachedGames 
 }};
 
 

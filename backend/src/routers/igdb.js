@@ -52,35 +52,34 @@ router.get('/igdb/game/id/:id', cache(604800), async (req,res) => {
             return res.status(404).send({'error' : 'Game not found with that id'});
         }
         
-        updateCache_Games(response.data[0].name,response.data[0]);
-        res.send({[response.data[0].name] : response.data[0]});
+        updateCache_Games(response.data[0].slug,response.data[0]);
+        res.send({[response.data[0].slug] : response.data[0]});
     } catch (e) {
         res.status(400).send(e.error);
     }
 });
 
-router.get('/igdb/game/name/:name', cache(604800), async (req,res) => {
+router.get('/igdb/game/slug/:slug', cache(604800), async (req,res) => {
     try {
         const response = await apicalypse(requestOptions)
             .fields('*,cover.*')
-            .where('name="' + req.params.name + '"')
+            .where('slug="' + req.params.slug + '"')
             .request('/games');
 
         if(response.data.length === 0) {
             return res.status(404).send({'error' : 'Game not found with that name'})
         }
 
-        updateCache_Games(response.data[0].name,response.data[0]);
-        res.send({[response.data[0].name] : response.data[0]});
+        updateCache_Games(response.data[0].slug,response.data[0]);
+        res.send({[response.data[0].slug] : response.data[0]});
     } catch (e) {
         //Todo: fix error handling
         res.status(400).send(e.error);
     }
 });
 
-const getCache_Games = () => {
-    return mcache.get(gameCacheName);
-};
+const getCache_Games = () => (mcache.get(gameCacheName));
+
 
 const updateCache_Games = (name, data) => {
     let games = mcache.get(gameCacheName);

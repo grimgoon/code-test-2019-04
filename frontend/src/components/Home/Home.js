@@ -5,16 +5,16 @@ import style from './Home.module.css';
 
 import Card from '../UI/Card/Card';
 import SearchBar from '../UI/SearchBar/SearchBar';
+import slugify from '../../utils/slugify';
 
 class Home extends Component {
-
     componentDidMount() {
         this.props.fetchTwitchTop();
     };
 
     twitchTopCards = () => {
         return this.props.twitchTop.map(data => {
-            return <Card key={data.name} name={data.name} />
+            return <Card key={data.name} name={slugify(data.name)} />
         });
     };
 

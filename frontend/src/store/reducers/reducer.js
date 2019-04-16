@@ -3,7 +3,7 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
     twitchTop: [],
     gameData: {},
-    fetchedAllGames : false
+    fetchedCachedGames : false
 
 }
 
@@ -16,7 +16,7 @@ const reducer = (state = initialState, action) => {
                     ...state.gameData,
                     ...action.gameData
                 },
-                fetchedAllGames : action.fetchedAllGames
+                fetchedCachedGames : action.fetchedCachedGames
             }
         case actionTypes.FETCH_TWITCH_TOP :
         return {

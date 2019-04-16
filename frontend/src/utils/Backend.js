@@ -1,16 +1,16 @@
-import Axios from 'axios';
+import axios from 'axios';
 
 export const getTwitchTop = (amount) => {
     return new Promise (async (resolve,reject) => {
-        Axios.get('/twitch/top/' + amount)
+        axios.get('/twitch/top/' + amount)
             .then(resolve)
             .catch(reject);
     });
 };
 
-export const getIgdbGameByName = (name) => {
+export const getIgdbGameBySlug = (slug) => {
     return new Promise (async (resolve,reject) => {
-        Axios.get('/igdb/game/name/' + name)
+        axios.get('/igdb/game/slug/' + slug)
             .then(resolve)
             .catch(reject);
     });
@@ -18,7 +18,7 @@ export const getIgdbGameByName = (name) => {
 
 export const getIgdbGames = () => {
     return new Promise (async (resolve,reject) => {
-        Axios.get('/igdb/games')
+        axios.get('/igdb/games')
             .then(resolve)
             .catch(reject);
     });

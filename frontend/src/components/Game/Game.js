@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {Route, Switch} from 'react-router-dom';
 
 import * as actionCreator from '../../store/actions/actions';
-import style from './Game.module.css';
 import NoMatch from '../NoMatch/NoMatch';
 import GamePage from './GamePage/GamePage';
 
@@ -25,29 +24,28 @@ class Game extends Component {
     }
 
     gameRoutes = () => {
-        let {fetchedCachedGames,match} = this.props;
-        if(fetchedCachedGames) {
-            return Object.values(this.props.games)
-                .map(game => game.error ? null : 
-                    <Route 
+        let {fetchedCachedGames,match,games} = this.props;
+        if(fetchedCachedGames && games[this.path]) {
+            return Object.values(games)
+                .map(game => {
+                    let render = game.error ? <NoMatch/> : <GamePage data={game}/>
+                    return <Route
+                        key={game.slug} 
                         exact 
                         path={match.path + '/' + game.slug} 
-                        render={() => <GamePage data={game}/>}
+                        render={() => render}
                     />
-                );
+                }
+            );
         }
-        return null;
     };
 
     render() {
-        console.log(this.props);
         let gameRoutes = this.gameRoutes();
-        console.log(gameRoutes);
         return(
             <Switch>
                 <Route exact path="/game" component={NoMatch}/>
                 {gameRoutes}
-                <Route component={NoMatch}/>
             </Switch>
         )
     };

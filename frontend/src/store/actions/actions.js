@@ -18,17 +18,15 @@ const updateTwitchTop = res => ({
 
 
 // IGDB
-
 export const fetchGames = () => (dispatch,getState) => {
     if(Object.entries(getState().gameData).length === 0 && getState().gameData.constructor === Object) {
         request.getIgdbGames()
-        .then(res => dispatch(updateGameData(res.data, true)))
+        .then(res => dispatch(updateFetchedGames(res.data, true)))
         .catch();
     }
 };
 
 export const fetchGameBySlug = (slug) => (dispatch,getState) => {
-    console.log(slug);
     if(!getState().gameData[slug]) {
         request.getIgdbGameBySlug(slug)
         .then(res => dispatch(updateGameData(res.data)))
@@ -37,11 +35,17 @@ export const fetchGameBySlug = (slug) => (dispatch,getState) => {
 };
 
 
-const updateGameData = (res, fetchedCachedGames = false) => {
-    return {
+const updateGameData = (res) =>({
     type: actionTypes.UPDATE_GAME_DATA,
     gameData : res,
-    fetchedCachedGames 
-}};
+});
+
+const updateFetchedGames  = (res,fetchedCachedGames) =>({
+    type: actionTypes.UPDATE_CACHED_DATA,
+    gameData : res,
+    fetchedCachedGames
+});
+
+
 
 

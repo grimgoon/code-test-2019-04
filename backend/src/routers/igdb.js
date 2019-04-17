@@ -49,7 +49,7 @@ router.get('/igdb/game/id/:id', cache(604800), async (req,res) => {
             .request('/games');
 
         if(response.data.length === 0) {
-            return res.status(404).send({'error' : 'Game not found with that id'});
+            return res.send({'error' : 'Game not found with that id'});
         }
         
         updateCache_Games(response.data[0].slug,response.data[0]);
@@ -67,9 +67,9 @@ router.get('/igdb/game/slug/:slug', cache(604800), async (req,res) => {
             .request('/games');
 
         if(response.data.length === 0) {
-            errorMessage = {'error' : 'Game not found with that slug'};
+            errorMessage = {'error' : 'Game not found with that slug', "slug" : req.params.slug};
             updateCache_Games([req.params.slug],errorMessage);
-            return res.status(404).send({[req.params.slug] : {'error' : 'Game not found with that name'}})
+            return res.send({[req.params.slug] : errorMessage})
         }
 
         updateCache_Games(response.data[0].slug,response.data[0]);

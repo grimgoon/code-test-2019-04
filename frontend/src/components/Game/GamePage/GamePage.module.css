@@ -1,0 +1,38 @@
+.content {
+    width: 86%;
+    margin: 0 auto;
+    margin-top: 20px;
+
+}
+
+.content > div {
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 8px 15px 0 rgba(40,40,40,.18);
+}
+
+.header {
+display: flex;
+}
+
+.headerData {
+    margin-left: 4%;
+    display:  flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.headerData > h1 {
+margin: 0px;
+}
+
+.headerData > p {
+
+}
+
+.header > img {
+    border-radius: 6px;
+    width: auto;
+    max-height: 200px;
+}
+

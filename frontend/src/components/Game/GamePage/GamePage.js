@@ -20,8 +20,7 @@ class GamePage extends Component {
         const streams = this.state.streams;
   
         if(streams && typeof(streams.error) === 'undefined') {
-            return streams.map((stream,i) => {
-                console.log(stream)
+            return streams.map(stream => {
                 let imageUrl = stream.thumbnail_url.replace('{width}','360').replace('{height}','203');
                 return <a href={'https://twitch.tv/' + stream.user_name} target="_BLANK" rel='noreferrer noopener' className={style.streamCard}>
                     <img 
@@ -33,10 +32,11 @@ class GamePage extends Component {
                     <p>{stream.viewer_count} Viewers</p>
                 </a>
             });
-        } else if(!streams) {
+        } else if(streams && typeof(streams.error) !== 'undefined') {
+            return "No streams could be found"
+        } else {
             return <div className={style.loaderRing}></div>    
         }
-        return "No streams were found";
     };
 
     render() {

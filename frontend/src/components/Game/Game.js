@@ -13,7 +13,7 @@ class Game extends Component {
 
     componentDidMount() {
         let {location, match} = this.props;
-        let updatedPath = location.pathname.replace(match.path + '/','');
+        let updatedPath = location.pathname.replace(match.path + '/','').replace('/','');
         if(!match.isExact || !updatedPath.indexOf('/')) {
             this.setState({path: updatedPath});
         }
@@ -25,6 +25,8 @@ class Game extends Component {
     };
 
     shouldFetchGame = () => {
+        console.log(typeof(this.props.games[this.state.path]) === 'undefined', this.props.fetchedCachedGames);
+        console.log(this.state.path);
         if(typeof(this.props.games[this.state.path]) === 'undefined' && this.props.fetchedCachedGames) {
             this.props.fetchGame(this.state.path);
         }    

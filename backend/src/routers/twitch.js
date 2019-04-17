@@ -14,13 +14,13 @@ router.get('/twitch/game/:name', cache(1800), async (req,res) => {
         const gameUrl = url + '/games?name=' + req.params.name;
         const gameResponse = await axios.get(gameUrl, config);
         if(gameResponse.data.data.length === 0 ) {
-            return res.status(404).send({"error" : "Game not found with that name"})
+            return res.send({"error" : "Game not found with that name"})
         }
 
         const streamsUrl = url + '/streams?game_id=' + gameResponse.data.data[0].id;
         const streamsResponse = await axios.get(streamsUrl, config);
         if(streamsResponse.data.data.length === 0 ) {
-            return res.status(404).send({"error" : "Streams not found with that game name"})
+            return res.send({"error" : "Streams not found with that game name"})
         }
 
         res.send(streamsResponse.data.data); 

@@ -13,6 +13,7 @@
 .header {
 display: flex;
 flex-direction: column;
+width: 100%;
 }
 
 .headerData {
@@ -28,10 +29,11 @@ margin: 0px;
 
 .header > img {
     border-radius: 6px;
-    width: 100%;
+    width: 40%;
     max-height: none;
     height: auto;
-    margin-bottom: 20px;
+    padding-bottom: 20px;
+    margin: 0 auto;
 
 }
 

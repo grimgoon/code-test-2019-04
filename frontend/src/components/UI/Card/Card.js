@@ -21,7 +21,6 @@ class Card extends Component {
     componentDidUpdate() {
         console.log(this.props.name);
         if(!this.excludeTopGames.some(game => this.props.name === game) && !this.props.game && this.props.fetchedCachedGames) {
-            console.log("Blah!");
             this.props.fetchGame(this.props.name);
         }
     };
@@ -41,7 +40,6 @@ class Card extends Component {
     };
 
     render() {
-        console.log(this.props.fetchedCachedGames)
         let card = this.card();
         return (card);
     };

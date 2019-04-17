@@ -12,7 +12,6 @@ import NoMatch from './components/NoMatch/NoMatch';
 
 class App extends Component {
   componentDidMount() {
-    console.log(this.props);
     this.props.fetchGames();
   }
 

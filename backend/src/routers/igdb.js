@@ -67,7 +67,9 @@ router.get('/igdb/game/slug/:slug', cache(604800), async (req,res) => {
             .request('/games');
 
         if(response.data.length === 0) {
-            return res.status(404).send({'error' : 'Game not found with that name'})
+            errorMessage = {'error' : 'Game not found with that slug'};
+            updateCache_Games([req.params.slug],errorMessage);
+            return res.status(404).send({[req.params.slug] : {'error' : 'Game not found with that name'}})
         }
 
         updateCache_Games(response.data[0].slug,response.data[0]);

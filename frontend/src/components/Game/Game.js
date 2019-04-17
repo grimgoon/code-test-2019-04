@@ -7,27 +7,36 @@ import NoMatch from '../NoMatch/NoMatch';
 import GamePage from './GamePage/GamePage';
 
 class Game extends Component {
-    path = null;
+    state = {
+        path: null
+    }
 
     componentDidMount() {
         let {location, match} = this.props;
         let updatedPath = location.pathname.replace(match.path + '/','');
         if(!match.isExact || !updatedPath.indexOf('/')) {
-            this.path = updatedPath;
+            this.setState({path: updatedPath});
         }
-    }
+        this.shouldFetchGame();
+    };
 
     componentDidUpdate() {
-        if(!this.props.games[this.path] && this.props.fetchedCachedGames) {
-            this.props.fetchGame(this.path);
-        }
-    }
+        this.shouldFetchGame();
+    };
+
+    shouldFetchGame = () => {
+        if(typeof(this.props.games[this.state.path]) === 'undefined' && this.props.fetchedCachedGames) {
+            this.props.fetchGame(this.state.path);
+        }    
+    };
 
     gameRoutes = () => {
         let {fetchedCachedGames,match,games} = this.props;
-        if(fetchedCachedGames && games[this.path]) {
+
+        if(fetchedCachedGames) {
             return Object.values(games)
                 .map(game => {
+
                     let render = game.error ? <NoMatch/> : <GamePage data={game}/>
                     return <Route
                         key={game.slug} 

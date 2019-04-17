@@ -23,7 +23,7 @@ router.get('/twitch/game/:name', cache(1800), async (req,res) => {
             return res.status(404).send({"error" : "Streams not found with that game name"})
         }
 
-        res.send(streamsResponse.data); 
+        res.send(streamsResponse.data.data); 
     } catch(e) {
         res.status(400).send(e.error);
     }

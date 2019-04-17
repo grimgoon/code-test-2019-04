@@ -1,5 +1,13 @@
 import axios from 'axios';
 
+export const getTwitchStreamsByName = (name) => {
+    return new Promise (async (resolve,reject) => {
+        axios.get('/twitch/game/' + name)
+            .then(resolve)
+            .catch(reject);
+    });
+}
+
 export const getTwitchTop = (amount) => {
     return new Promise (async (resolve,reject) => {
         axios.get('/twitch/top/' + amount)

@@ -34,7 +34,6 @@ export const fetchGameBySlug = (slug) => (dispatch,getState) => {
     }
 };
 
-
 const updateGameData = (res) =>({
     type: actionTypes.UPDATE_GAME_DATA,
     gameData : res,

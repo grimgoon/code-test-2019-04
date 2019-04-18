@@ -11,8 +11,13 @@ class SearchBar extends Component {
     submit = (e) => {
         e.preventDefault();
         let searchValue = this.state.searchValue;
-        let path = '/search/?value=' + searchValue;
-        this.props.history.push({pathname : path});
+        if(searchValue) {
+            const search = '?value=' + searchValue;
+            this.props.history.push({
+                pathname : '/search/',
+                search,
+            });
+        }
     };
 
     searchValueHandler = (e) => {
@@ -20,7 +25,6 @@ class SearchBar extends Component {
     }
 
     render() {
-        console.log(this.props);
         return (
             <form onSubmit={this.submit}>
                 <input type="text" placeholder="Search..." value={this.state.searchValue} onChange={this.searchValueHandler} className={style.SearchBar}/>

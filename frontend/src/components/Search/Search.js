@@ -1,8 +1,13 @@
 import React, {Component} from 'react';
 import qs from 'query-string'
 import {connect} from 'react-redux'; 
+
 import * as request from '../../utils/backend';
+import slugify from '../../utils/slugify'
+
 import SearchBar from '../UI/SearchBar/SearchBar';
+import Card from '../UI/Card/Card';
+
 
 class Search extends Component {
     state = {
@@ -10,32 +15,50 @@ class Search extends Component {
     }
 
     componentDidMount() {
-        this.meep();
+        this.searchGames();
     }
 
-    meep = () => {
+    componentDidUpdate(prevProps, prevState,snapshot) {
+        if(snapshot) {
+            this.searchGames();
+        }
+    }
+
+    getSnapshotBeforeUpdate(prevProps) {
+        if (prevProps.location !== this.props.location) {
+            return this.props.location.search
+          }
+    }
+
+    searchGames = () => {
         let {location} = this.props;
         const parseGet = qs.parse(location.search);
 
-        if(typeof(parseGet.value) !== 'undefined') {
+        if(typeof(parseGet.value) !== 'undefined' && parseGet.value !== null) {
             request.searchIgdbGames(parseGet.value).then((res) => {this.setState({searchData : res.data})});
         } else {
-            this.setState({searchData : "No data found lmao"});
+            this.setState({searchData : {}});
         }       
     };
 
     searchCards = () => {
-        return <div>I'm a card</div>
+        return typeof(this.state.searchData.error) === 'undefined' ? 
+            this.state.searchData.map(data => <Card name={slugify(data.name)}/>) :
+            "No results ";
+    }
+
+    noResults = () => {
+        return <div>No Results were found</div>
     }
 
     render() {
-        console.log(this.props);
+        console.log(this.state.searchData);
         const searchData = typeof(this.state.searchData) === 'object' && this.state.searchData !== null ? 
             this.searchCards() : 
             null;
 
         return (
-            <div>
+            <div >
                 <SearchBar/>
                 {searchData}
             </div>

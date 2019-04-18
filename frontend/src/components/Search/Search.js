@@ -4,10 +4,10 @@ import {connect} from 'react-redux';
 
 import * as request from '../../utils/backend';
 import slugify from '../../utils/slugify'
+import style from './Search.module.css';
 
 import SearchBar from '../UI/SearchBar/SearchBar';
 import Card from '../UI/Card/Card';
-
 
 class Search extends Component {
     state = {
@@ -52,22 +52,17 @@ class Search extends Component {
     }
 
     render() {
-        console.log(this.state.searchData);
         const searchData = typeof(this.state.searchData) === 'object' && this.state.searchData !== null ? 
             this.searchCards() : 
             null;
 
         return (
-            <div >
+            <div className={style.content}>
                 <SearchBar/>
-                {searchData}
+                <div>{searchData}</div>
             </div>
         );
     };
 };
-
-const mapDispatchToProps = dispatch => ({
-    
-});
 
 export default Search;

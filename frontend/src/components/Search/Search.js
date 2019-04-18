@@ -28,6 +28,7 @@ class Search extends Component {
         if (prevProps.location !== this.props.location) {
             return this.props.location.search
           }
+        return null;
     }
 
     searchGames = () => {
@@ -43,12 +44,12 @@ class Search extends Component {
 
     searchCards = () => {
         return typeof(this.state.searchData.error) === 'undefined' ? 
-            this.state.searchData.map(data => <Card name={slugify(data.name)}/>) :
-            "No results ";
+            <div className={style.cards}>{this.state.searchData.map(data => <Card name={slugify(data.name)}/>)}</div> :
+            this.noResults();
     }
 
     noResults = () => {
-        return <div>No Results were found</div>
+        return <div className={style.noResults}>No Results were found</div>
     }
 
     render() {
@@ -57,10 +58,12 @@ class Search extends Component {
             null;
 
         return (
+            <>
+            <SearchBar/>
             <div className={style.content}>
-                <SearchBar/>
-                <div>{searchData}</div>
+                {searchData}
             </div>
+            </>
         );
     };
 };

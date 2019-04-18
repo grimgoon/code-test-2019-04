@@ -5,7 +5,7 @@ import {withRouter} from 'react-router-dom';
 class SearchBar extends Component {
 
     state = {
-        searchValue : null
+        searchValue : ""
     }
 
     submit = (e) => {

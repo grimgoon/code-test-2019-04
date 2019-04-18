@@ -1,4 +1,47 @@
 .content {
     width: 86%;
     margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 2%;
 }
+
+.noResults {
+    display: block;
+    font-size: 2rem;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+.cards {
+    width: 40%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 6%;
+}
+
+h2 {
+    text-align: center;
+    font-size: 2rem;
+}
+
+@media only screen and (min-width: 1024px) {
+    .cards {
+        width: 86%;
+        display: grid;
+        grid-template-columns: 20% 20% 20% 20%;
+        grid-column-gap: 6.6%;
+        grid-row-gap: 2%;
+    }
+  }
+
+
+@media only screen and (min-width: 1440px) {
+    .cards {
+        grid-template-columns: 14% 14% 14% 14% 14% 14%;
+        grid-column-gap: 3.2%;
+    }
+  }

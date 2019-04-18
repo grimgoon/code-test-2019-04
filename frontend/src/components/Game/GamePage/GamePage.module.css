@@ -133,7 +133,7 @@ transition: transform linear 0.2s;
     .header > img {
         width: auto;
         max-height: 200px;
-        margin-bottom: 0px;
+        margin: 0;
     }
 
     .streams {

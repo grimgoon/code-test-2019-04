@@ -31,7 +31,7 @@ router.get('/igdb/search/:name', cache(86400), async (req,res) => {
             .request('/games');
 
             if(response.data.length === 0) {
-                return res.status(404).send({'error' : 'Game not found with that name'});
+                return res.send({'error' : 'Game not found with that name'});
             }
         res.send(response.data);
     } catch(e) {

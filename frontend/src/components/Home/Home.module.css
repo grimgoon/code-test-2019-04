@@ -11,10 +11,19 @@ h2 {
     font-size: 2rem;
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 768px) {
     .cards {
         width: 86%;
         display: grid;
+        grid-template-columns: 46% 46%;
+        grid-column-gap: 8%;
+        grid-row-gap: 2%;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .cards {
+        width: 86%;
         grid-template-columns: 20% 20% 20% 20%;
         grid-column-gap: 6.6%;
         grid-row-gap: 2%;

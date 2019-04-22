@@ -31,14 +31,16 @@ class Search extends Component {
     }
 
     searchGames = () => {
+        if(this.state.searchData !== null) {
+            this.setState({searchData : null});
+        }
+        
         let {location} = this.props;
         const parseGet = qs.parse(location.search);
 
         if(typeof(parseGet.value) !== 'undefined' && parseGet.value !== null) {
             request.searchIgdbGames(parseGet.value).then((res) => {this.setState({searchData : res.data})});
-        } else {
-            this.setState({searchData : {}});
-        }       
+        }
     };
 
     searchCards = () => (
@@ -48,17 +50,27 @@ class Search extends Component {
     );
 
     noResults = () => <div className={style.noResults}>No Results were found</div>
+    
+    renderData = () => {
+        const {searchData} = this.state;
+
+        if(searchData === "loading") {
+            return "Loading..."
+        } else if (searchData !== null && typeof(searchData) == 'object') {
+            return this.searchCards()
+        }
+        return null;
+    }
 
     render() {
-        const searchData = typeof(this.state.searchData) === 'object' && this.state.searchData !== null ? 
-            this.searchCards() : 
-            null;
+        console.log(this.state.searchData);
+        const renderData = this.renderData();
 
         return (
             <>
                 <SearchBar/>
                 <div className={style.content}>
-                    {searchData}
+                    {renderData}
                 </div>
             </>
         );

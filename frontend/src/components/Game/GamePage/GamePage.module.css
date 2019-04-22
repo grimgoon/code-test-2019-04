@@ -31,24 +31,24 @@ margin: 0px;
     width: 40%;
     max-height: none;
     height: auto;
-    padding-bottom: 20px;
     margin: 0 auto;
 
 }
 
 .streams {
     display: grid;
-    grid-template-columns: 46% 46%;
-    grid-column-gap: 4%;
+    grid-template-columns: 100%;
+    grid-column-gap: 0%;
 }
 
 .streamCard {
-margin-top: 10%;
-position: relative;
-display: block;
-text-decoration: none;
-color: #000000;
-transition: transform linear 0.2s;
+    margin-top: 10%;
+    position: relative;
+    display: block;
+    text-decoration: none;
+    color: #000000;
+    transition: transform linear 0.2s;
+    box-shadow: 12px 12px 4px 0 rgba(40,40,40,0.4);
 }
 
 .streamCard:hover {
@@ -65,7 +65,10 @@ transition: transform linear 0.2s;
     padding: 20px 0px;
     text-align: center;
     font-size: 1rem;
-    background-color: #d9d9db;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .streamCard > h2 > img {
@@ -96,6 +99,13 @@ transition: transform linear 0.2s;
     text-transform: uppercase;
 }
 
+.streamImagePlaceholder {
+    width: 100%;
+    height: 21vh;
+    background-color: #dcdddf;
+
+}
+
 .loaderRing {
     display: inline-block;
     width: 64px;
@@ -124,6 +134,13 @@ transition: transform linear 0.2s;
   }
   
 
+  @media only screen and (min-width: 768px) {
+    .streams {
+        grid-template-columns: 46% 46%;
+        grid-column-gap: 4%;
+    }
+}
+
 
 @media only screen and (min-width: 1024px) {
     .header {
@@ -140,7 +157,7 @@ transition: transform linear 0.2s;
         grid-template-columns: 30% 30% 30%;
         grid-column-gap: 3.3%;
     }
-  }
+}
 
 
 @media only screen and (min-width: 1440px) {

@@ -13,9 +13,7 @@ class Home extends Component {
     };
 
     twitchTopCards = () => {
-        return this.props.twitchTop.map(data => {
-            return <Card key={data.name} name={slugify(data.name)} />
-        });
+        return this.props.twitchTop.map(data => <Card key={data.name} name={slugify(data.name)}/>);
     };
 
     render() {

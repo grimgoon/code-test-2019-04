@@ -1,7 +1,6 @@
 const express = require('express');
 const router = new express.Router();
 const axios = require('axios');
-
 const cache = require('../utils/mcache');
 
 const url = 'https://api.twitch.tv/helix';

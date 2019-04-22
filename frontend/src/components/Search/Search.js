@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import qs from 'query-string'
-import {connect} from 'react-redux'; 
 
 import * as request from '../../utils/backend';
 import slugify from '../../utils/slugify'
@@ -42,15 +41,13 @@ class Search extends Component {
         }       
     };
 
-    searchCards = () => {
-        return typeof(this.state.searchData.error) === 'undefined' ? 
-            <div className={style.cards}>{this.state.searchData.map(data => <Card name={slugify(data.name)}/>)}</div> :
-            this.noResults();
-    }
+    searchCards = () => (
+        typeof(this.state.searchData.error) === 'undefined' ? 
+            <div className={style.cards}>{this.state.searchData.map(data => <Card key={data.name} name={slugify(data.name)}/>)}</div> :
+            this.noResults()
+    );
 
-    noResults = () => {
-        return <div className={style.noResults}>No Results were found</div>
-    }
+    noResults = () => <div className={style.noResults}>No Results were found</div>
 
     render() {
         const searchData = typeof(this.state.searchData) === 'object' && this.state.searchData !== null ? 
@@ -59,10 +56,10 @@ class Search extends Component {
 
         return (
             <>
-            <SearchBar/>
-            <div className={style.content}>
-                {searchData}
-            </div>
+                <SearchBar/>
+                <div className={style.content}>
+                    {searchData}
+                </div>
             </>
         );
     };

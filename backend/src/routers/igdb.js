@@ -22,7 +22,6 @@ router.get('/igdb/games', async (req,res) => {
     res.send(getCache_Games());
 });
 
-
 router.get('/igdb/search/:name', cache(86400), async (req,res) => {
     try {
         const response = await apicalypse(requestOptions)
@@ -34,7 +33,6 @@ router.get('/igdb/search/:name', cache(86400), async (req,res) => {
             if(response.data.length === 0) {
                 return res.status(404).send({'error' : 'Game not found with that name'});
             }
-            
         res.send(response.data);
     } catch(e) {
         res.status(400).send(e.error);
@@ -75,13 +73,11 @@ router.get('/igdb/game/slug/:slug', cache(604800), async (req,res) => {
         updateCache_Games(response.data[0].slug,response.data[0]);
         res.send({[response.data[0].slug] : response.data[0]});
     } catch (e) {
-        //Todo: fix error handling
         res.status(400).send(e.error);
     }
 });
 
 const getCache_Games = () => (mcache.get(gameCacheName));
-
 
 const updateCache_Games = (name, data) => {
     let games = mcache.get(gameCacheName);

@@ -34,7 +34,7 @@ class Search extends Component {
         if(this.state.searchData !== null) {
             this.setState({searchData : null});
         }
-        
+
         let {location} = this.props;
         const parseGet = qs.parse(location.search);
 
@@ -63,7 +63,6 @@ class Search extends Component {
     }
 
     render() {
-        console.log(this.state.searchData);
         const renderData = this.renderData();
 
         return (

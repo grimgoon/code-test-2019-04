@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 require('dotenv').config();
 
 const twitchRouter = require('./routers/twitch');
@@ -11,6 +12,12 @@ app.use(express.json());
 
 app.use(twitchRouter);
 app.use(igdbRouter);
+
+
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname,'frontend/index.html'));
+  });
 
 app.listen(port, () => {
     console.log('Server is up on port: ' + port);

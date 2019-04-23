@@ -13,12 +13,6 @@ app.use(express.json());
 app.use(twitchRouter);
 app.use(igdbRouter);
 
-
-
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname,'frontend/index.html'));
-  });
-
 app.listen(port, () => {
     console.log('Server is up on port: ' + port);
 });

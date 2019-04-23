@@ -35,7 +35,8 @@ router.get('/igdb/search/:name', cache(86400), async (req,res) => {
             }
         res.send(response.data);
     } catch(e) {
-        res.status(400).send(e.error);
+        console.log(e);
+        res.status(400).send();
     }
 });
 
@@ -43,17 +44,19 @@ router.get('/igdb/game/id/:id', cache(604800), async (req,res) => {
     try {
         const response = await apicalypse(requestOptions)
             .fields('*,cover.*')
-            .where('id=' + req.params.id)
+            .where(`slug="${req.params.id}"`)
             .request('/games');
 
         if(response.data.length === 0) {
             return res.send({'error' : 'Game not found with that id'});
         }
         
-        updateCache_Games(response.data[0].slug,response.data[0]);
-        res.send({[response.data[0].slug] : response.data[0]});
+        const data = response.data[0];
+        updateCache_Games(data.slug,data);
+        res.send({[data.slug] : data});
     } catch (e) {
-        res.status(400).send(e.error);
+        console.log(e);
+        res.status(400).send();
     }
 });
 
@@ -61,7 +64,7 @@ router.get('/igdb/game/slug/:slug', cache(604800), async (req,res) => {
     try {
         const response = await apicalypse(requestOptions)
             .fields('*,cover.*')
-            .where('slug="' + req.params.slug + '"')
+            .where(`slug="${req.params.slug}"`)
             .request('/games');
 
         if(response.data.length === 0) {
@@ -70,10 +73,12 @@ router.get('/igdb/game/slug/:slug', cache(604800), async (req,res) => {
             return res.send({[req.params.slug] : errorMessage})
         }
 
-        updateCache_Games(response.data[0].slug,response.data[0]);
-        res.send({[response.data[0].slug] : response.data[0]});
+        const data = response.data[0];
+        updateCache_Games(data.slug,data);
+        res.send({[data.slug] : data});
     } catch (e) {
-        res.status(400).send(e.error);
+        console.log(e);
+        res.status(400).send();
     }
 });
 
